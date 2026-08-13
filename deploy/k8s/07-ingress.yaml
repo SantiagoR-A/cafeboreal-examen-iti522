@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cafeboreal-ingress
+  namespace: cafeboreal
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /api/catalog(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: catalog-api
+                port:
+                  number: 8000
+          - path: /api/orders(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: orders-api
+                port:
+                  number: 8000
+          - path: /api/customers(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: customers-api
+                port:
+                  number: 8000
+                  
