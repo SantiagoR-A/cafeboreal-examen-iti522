@@ -112,4 +112,4 @@ def delete_customer(customer_id: int):
             conn.commit()
     finally:
         conn.close()
-        
+            
